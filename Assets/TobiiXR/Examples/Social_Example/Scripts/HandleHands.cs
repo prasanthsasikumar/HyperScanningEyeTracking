@@ -1,5 +1,6 @@
 ﻿// Copyright © 2018 – Property of Tobii AB (publ) - All Rights Reserved
 
+using Photon.Pun;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine.XR;
 /// <summary>
 /// Updates models for hands which follow the controllers.
 /// </summary>
-public class HandleHands : MonoBehaviour
+public class HandleHands : MonoBehaviourPunCallbacks, IPunObservable
 {
 #pragma warning disable 649
     [SerializeField, Tooltip("Left hand prefab")]
@@ -35,8 +36,8 @@ public class HandleHands : MonoBehaviour
 	    InputTracking.trackingAcquired += InputTrackingOnTrackingAcquired;
 
         // Instantiate hands.
-        _leftHandGameObject = Instantiate(_leftHandPrefab, transform);
-        _rightHandGameObject = Instantiate(_rightHandPrefab, transform);
+        _leftHandGameObject = _leftHandPrefab; //Instantiate(_leftHandPrefab, transform);
+        _rightHandGameObject = _rightHandPrefab;// Instantiate(_rightHandPrefab, transform);
 
 	    HideInactiveHands();
 
@@ -45,6 +46,12 @@ public class HandleHands : MonoBehaviour
 
     void Update ()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+
+
         InputTracking.GetNodeStates(_nodeStates);
         foreach (var xrNodeState in _nodeStates.Where(xrNodeState => xrNodeState.tracked))
         {
