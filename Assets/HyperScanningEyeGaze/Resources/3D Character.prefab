@@ -901,6 +901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ec9d2d5b60f974fa863680f7346aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 1
   _leftHandPrefab: {fileID: 2310926520597322237}
   _rightHandPrefab: {fileID: 8255413006400604106}
   _positionHandsLocally: 1

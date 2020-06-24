@@ -86,6 +86,7 @@ namespace Photon.Pun.Demo.PunBasics
             {
                 this.GetComponent<FollowCameraHeight>().enabled = false;
                 this.GetComponentInChildren<RotateWithHMD>().enabled = false;
+                this.GetComponentInChildren<HandleHands>().isMine = false;
             }
 
             // #Critical

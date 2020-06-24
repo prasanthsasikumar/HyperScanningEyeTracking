@@ -1,6 +1,5 @@
 ﻿// Copyright © 2018 – Property of Tobii AB (publ) - All Rights Reserved
 
-using Photon.Pun;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,8 +8,10 @@ using UnityEngine.XR;
 /// <summary>
 /// Updates models for hands which follow the controllers.
 /// </summary>
-public class HandleHands : MonoBehaviourPunCallbacks, IPunObservable
+public class HandleHands : MonoBehaviour
 {
+    public bool isMine = true;
+
 #pragma warning disable 649
     [SerializeField, Tooltip("Left hand prefab")]
     private GameObject _leftHandPrefab;
@@ -46,7 +47,7 @@ public class HandleHands : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update ()
     {
-        if (!photonView.IsMine)
+        if (!isMine)
         {
             return;
         }
